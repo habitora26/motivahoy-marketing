@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MotivaHoy | Inspiracion diaria</title>
+  <meta name="description" content="MotivaHoy te acompana cada dia con frases motivacionales, favoritos, frases extra y una experiencia visual elegante y ligera." />
+  <style>
+    :root {
+      --bg1: #8fd3f4;
+      --bg2: #c2e9fb;
+      --bg3: #e7d8ff;
+      --text: #17203a;
+      --muted: #4c5878;
+      --card: rgba(255, 255, 255, 0.26);
+      --card-strong: rgba(255, 255, 255, 0.72);
+      --stroke: rgba(255, 255, 255, 0.45);
+      --shadow: 0 18px 45px rgba(33, 36, 61, 0.18);
+      --radius: 28px;
+      --accent1: #6dd5fa;
+      --accent2: #b9ffb6;
+      --accent3: #7b61ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.75) 0, rgba(255,255,255,0) 28%),
+        radial-gradient(circle at 85% 18%, rgba(255,255,255,0.52) 0, rgba(255,255,255,0) 25%),
+        radial-gradient(circle at 75% 78%, rgba(255,255,255,0.42) 0, rgba(255,255,255,0) 25%),
+        linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 38%, var(--bg3) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .stars,
+    .stars::before,
+    .stars::after {
+      position: fixed;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 10% 15%, rgba(255,255,255,.9) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 25% 30%, rgba(255,255,255,.8) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 70% 20%, rgba(255,255,255,.85) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 80% 60%, rgba(255,255,255,.75) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 35% 75%, rgba(255,255,255,.75) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 58% 45%, rgba(255,255,255,.8) 0 1px, transparent 1.5px);
+      opacity: .65;
+    }
+
+    .stars::before { transform: scale(1.2); opacity: .45; }
+    .stars::after { transform: scale(1.45); opacity: .28; }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      padding: 20px 0 8px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.28);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(160deg, #ffb347 0%, #ff7f50 25%, #7b61ff 72%, #2d5bff 100%);
+      box-shadow: 0 10px 22px rgba(66, 39, 136, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-badge::before {
+      content: "";
+      position: absolute;
+      inset: 22px 6px 6px;
+      background: linear-gradient(180deg, #10235b, #0c1640);
+      border-radius: 30px 30px 16px 16px;
+    }
+
+    .brand-badge::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 42%;
+      width: 64px;
+      height: 64px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255,255,230,1) 0%, rgba(255,224,96,.95) 18%, rgba(255,194,69,.75) 32%, rgba(255,194,69,0) 65%);
+    }
+
+    .nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      opacity: .84;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 34px;
+      align-items: center;
+      padding: 38px 0 26px;
+    }
+
+    .hero-copy {
+      padding: 10px 6px 10px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.42);
+      border: 1px solid rgba(255,255,255,.55);
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(48px, 7vw, 84px);
+      line-height: .97;
+      letter-spacing: -.05em;
+    }
+
+    .lead {
+      margin: 0;
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 50px rgba(33, 36, 61, 0.2);
+    }
+
+    .btn-primary {
+      color: #10223f;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255,255,255,.52);
+      border: 1px solid rgba(255,255,255,.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 690px;
+      border-radius: 38px;
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.48), rgba(255,255,255,.18));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      overflow: hidden;
+      padding: 18px;
+    }
+
+    .glow {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(38px);
+      opacity: .8;
+    }
+
+    .glow.one {
+      width: 180px; height: 180px; background: rgba(123, 97, 255, .22); top: 70px; right: -20px;
+    }
+    .glow.two {
+      width: 220px; height: 220px; background: rgba(109, 213, 250, .26); bottom: 70px; left: -20px;
+    }
+
+    .phone {
+      position: absolute;
+      left: 50%;
+      top: 48px;
+      transform: translateX(-50%);
+      width: min(390px, 82%);
+      aspect-ratio: 9 / 19.5;
+      border-radius: 48px;
+      padding: 12px;
+      background: linear-gradient(145deg, #f8f2ff, #b8bee6 28%, #6a67a9 52%, #f8e6ff 100%);
+      box-shadow: 0 24px 50px rgba(48, 35, 82, .28);
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 42px;
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(240,248,255,.92));
+    }
+
+    .screen {
+      position: absolute;
+      inset: 18px 16px 16px;
+      border-radius: 38px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 25% 18%, rgba(255,255,255,.75) 0 2px, transparent 2px),
+        radial-gradient(circle at 78% 24%, rgba(255,255,255,.55) 0 2px, transparent 2px),
+        linear-gradient(180deg, #eef8fb 0%, #d8f0ec 55%, #d0ebe5 100%);
+      padding: 28px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .notch {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 130px;
+      height: 28px;
+      border-radius: 999px;
+      background: #0b1534;
+      z-index: 2;
+    }
+
+    .screen-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      margin-top: 16px;
+    }
+
+    .settings-card {
+      background: rgba(166, 175, 170, .55);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 24px;
+      box-shadow: 0 14px 26px rgba(42, 44, 64, .12);
+      padding: 16px 16px 18px;
+      color: #fff;
+    }
+
+    .settings-card h3 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .settings-card p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: .96;
+    }
+
+    .picker {
+      margin-top: 14px;
+      background: rgba(255,255,255,.95);
+      border-radius: 18px;
+      padding: 14px 16px;
+      color: #17203a;
+      font-weight: 800;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .switch {
+      width: 72px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.32);
+      position: relative;
+      margin-left: auto;
+    }
+
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .mini-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .badge-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 18px 0 10px;
+    }
+
+    .badge {
+      padding: 18px 16px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(255,255,255,.46);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .badge strong {
+      display: block;
+      font-size: 18px;
+      margin-top: 6px;
+      letter-spacing: -.02em;
+    }
+
+    .section {
+      padding: 28px 0 56px;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(32px, 4vw, 54px);
+      letter-spacing: -.04em;
+    }
+
+    .section-head p {
+      margin: 0 auto;
+      max-width: 760px;
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 22px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.36);
+      border: 1px solid rgba(255,255,255,.5);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .panel h3 {
+      margin: 10px 0 10px;
+      font-size: 22px;
+      letter-spacing: -.03em;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .quote-band {
+      margin-top: 22px;
+      border-radius: 30px;
+      padding: 26px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255,255,255,.52), rgba(255,255,255,.24));
+      border: 1px solid rgba(255,255,255,.5);
+      box-shadow: var(--shadow);
+      font-size: clamp(20px, 2.5vw, 30px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+
+    footer {
+      padding: 10px 0 36px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-copy {
+        text-align: center;
+        padding-right: 0;
+      }
+      .lead { margin: 0 auto; }
+      .cta-row { justify-content: center; }
+      .grid { grid-template-columns: 1fr; }
+      .badge-row { grid-template-columns: 1fr; }
+      .hero-card { min-height: 660px; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 18px, 1180px); }
+      .nav {
+        border-radius: 24px;
+        flex-direction: column;
+      }
+      .nav-links { display: none; }
+      .hero { padding-top: 22px; }
+      .hero-card { min-height: 590px; }
+      .phone { width: 92%; top: 28px; }
+      .screen-title { font-size: 24px; }
+      .settings-card h3 { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="brand-badge" aria-hidden="true"></div>
+          <span>MotivaHoy</span>
+        </div>
+        <div class="nav-links" style="display:flex; gap:18px; align-items:center;">
+          <a href="#beneficios">Beneficios</a>
+          <a href="#ajustes">Personalizacion</a>
+          <a href="#descargar">Descargar</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">✨ Tu dosis diaria de enfoque y motivacion</div>
+        <h1>Motivate, organiza y personaliza tu dia.</h1>
+        <p class="lead">MotivaHoy convierte pequenos momentos en recordatorios poderosos. Lee frases inspiradoras, guarda tus favoritas y adapta la app a tu estilo con una experiencia simple, elegante y ligera.</p>
+        <div class="cta-row" id="descargar">
+          <a class="btn btn-primary" href="#">Descargar en App Store</a>
+          <a class="btn btn-secondary" href="#beneficios">Ver beneficios</a>
+        </div>
+
+        <div class="badge-row">
+          <div class="badge">
+            <div>💬</div>
+            <strong>Frases diarias</strong>
+          </div>
+          <div class="badge">
+            <div>❤️</div>
+            <strong>Favoritos rapidos</strong>
+          </div>
+          <div class="badge">
+            <div>🎨</div>
+            <strong>Fondos pastel</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card" id="ajustes">
+        <div class="glow one"></div>
+        <div class="glow two"></div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="screen">
+            <div class="screen-title">Ajustes</div>
+
+            <div class="settings-card">
+              <div class="mini-row">
+                <h3>Notificaciones</h3>
+                <div class="switch"></div>
+              </div>
+              <p>Recibe tu frase diaria y manten el enfoque sin complicaciones.</p>
+            </div>
+
+            <div class="settings-card">
+              <div class="mini-row">
+                <h3>Lectura</h3>
+                <div class="switch"></div>
+              </div>
+              <p>Activa texto grande para una lectura mas comoda y clara.</p>
+            </div>
+
+            <div class="settings-card">
+              <h3>Fondo</h3>
+              <p>Elige el color pastel que quieres usar en la app.</p>
+              <div class="picker">
+                <span>Tema actual</span>
+                <span>Menta ▾</span>
+              </div>
+            </div>
+
+            <div class="settings-card">
+              <h3>Legal</h3>
+              <p>Politica de privacidad siempre accesible en un solo toque.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="beneficios">
+      <div class="section-head">
+        <h2>Una app pensada para inspirarte sin ruido.</h2>
+        <p>Todo en MotivaHoy esta disenado para que abras la app, encuentres una frase poderosa y sigas tu dia con mas claridad, energia y constancia.</p>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <div style="font-size:28px;">☀️</div>
+          <h3>Inspira cada manana</h3>
+          <p>Empieza el dia con una frase seleccionada para recordarte tu enfoque y tu proposito.</p>
+        </div>
+        <div class="panel">
+          <div style="font-size:28px;">📌</div>
+          <h3>Guarda lo que te impulsa</h3>
+          <p>Marca tus frases favoritas y vuelve a ellas cuando necesites claridad, calma o motivacion.</p>
+        </div>
+        <div class="panel">
+          <div style="font-size:28px;">🌈</div>
+          <h3>Hazla tuya</h3>
+          <p>Disfruta una interfaz limpia con fondos pastel y ajustes simples para personalizar la experiencia.</p>
+        </div>
+      </div>
+
+      <div class="quote-band">"Una pequena frase puede cambiar la energia de todo tu dia."</div>
+    </section>
+
+    <footer>
+      © 2026 MotivaHoy · Pagina de marketing oficial
+    </footer>
+  </div>
+</body>
+</html>
